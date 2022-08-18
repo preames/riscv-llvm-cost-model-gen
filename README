@@ -1,0 +1,12 @@
+This repository contains a set of scripts for empirically gathering
+LLVM cost model costs for the RISCV backend.
+
+This code is licensed under the same terms as the LLVM project.
+
+To generate cost model:
+  python gen-cost-model.py
+  chmod u+x ./tmp.sh && ./tmp.sh
+  python parse.py
+
+To generate cost model tests:
+  python gen-cost-model-test.py
