@@ -27,7 +27,7 @@ intrinsic_type_mapping = {
     "<16 x double>":"v16f64",
     "<vscale x 1 x double>":"nvx1f64",
     "<vscale x 2 x double>":"nvx2f64",
-    "<vscale x 4 x double>":"nvx5f64",
+    "<vscale x 4 x double>":"nvx4f64",
     "<vscale x 8 x double>":"nvx8f64",
     "<vscale x 16 x double>":"nvx16f64"
     }

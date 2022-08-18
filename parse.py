@@ -1,6 +1,6 @@
 
 unary_intrinsics = [
-    "sqrt", "sin", "cos", "exp", "exp2", "log", "log10", "log2", "fabs",
+    #"sqrt", "sin", "cos", "exp", "exp2", "log", "log10", "log2", "fabs",
     "floor", "ceil", "trunc",
     "rint", "nearbyint",
     "round", "roundeven"
@@ -44,7 +44,7 @@ def cost_one(F):
         l = line.strip()
         if l == "" or l.startswith(".") or l.startswith("#"):
             continue
-        if "vsetv" in l and not saw_vsetvli:
+        if "vset" in l and not saw_vsetvli:
             saw_vsetvli = True
             continue
         if "call" in l:
@@ -85,7 +85,7 @@ for intrinsic in unary_intrinsics:
         mvt = "MVT::" + mangled.replace("vx", "xv")
         asmname = "%s_%s.s" % (intrinsic, mangled)
         if not os.path.exists(asmname):
-            print("   // %s_%s = CRASH" % (intrinsic, mvt))
+            #print("   // %s_%s = CRASH" % (intrinsic, mvt))
             continue
 
         with open(asmname, "r") as f:
@@ -93,7 +93,7 @@ for intrinsic in unary_intrinsics:
             if cost:
                 print("   {Intrinsic::%s, %s, %d}," % (intrinsic, mvt, cost))
             else:
-                print("   // %s_%s = None" % (intrinsic, mvt))
+                #print("   // %s_%s = None" % (intrinsic, mvt))
                 pass
             pass
         pass
