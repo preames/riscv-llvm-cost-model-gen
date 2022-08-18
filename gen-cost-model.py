@@ -36,10 +36,12 @@ intrinsic_type_mapping = {
     "<vscale x 16 x double>":"nvx16f64"
     }
 
+import os
+os.mkdir("./output/")
 for intrinsic in unary_intrinsics:
     for irtype in types:
         mangled = intrinsic_type_mapping[irtype]
-        with open("%s_%s.ll" % (intrinsic, mangled), "w") as f:   
+        with open("output/%s_%s.ll" % (intrinsic, mangled), "w") as f:   
             f.write("define %s @%s_%s(%s %%a) {\n" % (irtype, intrinsic, mangled, irtype))
             s = "  %%v = call %s @llvm.%s.%s(%s %%a)\n" % (irtype, intrinsic, mangled, irtype)
             f.write(s)
@@ -56,7 +58,7 @@ with open("tmp.sh", "w") as f:
     for intrinsic in unary_intrinsics:
         for irtype in types:
             mangled = intrinsic_type_mapping[irtype]
-            f.write("llc -march=riscv64 -mattr=+v,+f,+d -riscv-v-vector-bits-min=-1 -O3 %s_%s.ll\n" % (intrinsic, mangled))
+            f.write("llc -march=riscv64 -mattr=+v,+f,+d -riscv-v-vector-bits-min=-1 -O3 output/%s_%s.ll\n" % (intrinsic, mangled))
             pass
         pass
     pass

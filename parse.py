@@ -83,7 +83,7 @@ for intrinsic in unary_intrinsics:
     for irtype in types:
         mangled = intrinsic_type_mapping[irtype]
         mvt = "MVT::" + mangled.replace("vx", "xv")
-        asmname = "%s_%s.s" % (intrinsic, mangled)
+        asmname = "output/%s_%s.s" % (intrinsic, mangled)
         if not os.path.exists(asmname):
             #print("   // %s_%s = CRASH" % (intrinsic, mvt))
             continue
