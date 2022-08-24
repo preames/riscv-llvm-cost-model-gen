@@ -22,15 +22,15 @@ ceil_v4f32:                             # @ceil_v4f32
 	vmflt.vf	v9, v9, ft0
 	vmv.v.v	v0, v9
 	vfcvt.rtz.x.f.v	v10, v8, v0.t
-	vfcvt.f.x.v	v10, v10, v0.t
 	lui	a0, %hi(.LCPI0_1)
 	flw	ft0, %lo(.LCPI0_1)(a0)
-	vsetvli	zero, zero, e32, m1, ta, ma
-	vmflt.vv	v0, v10, v8, v0.t
-	vsetvli	zero, zero, e32, m1, ta, mu
-	vfadd.vf	v10, v10, ft0, v0.t
+	vfcvt.f.x.v	v11, v10, v0.t
+	vmv.v.v	v10, v9
+	vmflt.vv	v10, v11, v8, v0.t
+	vmv.v.v	v0, v10
+	vfadd.vf	v11, v11, ft0, v0.t
 	vmv.v.v	v0, v9
-	vfsgnj.vv	v8, v10, v8, v0.t
+	vfsgnj.vv	v8, v11, v8, v0.t
 	ret
 .Lfunc_end0:
 	.size	ceil_v4f32, .Lfunc_end0-ceil_v4f32

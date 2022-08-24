@@ -22,12 +22,11 @@ ceil_v16f64:                            # @ceil_v16f64
 	vmflt.vf	v16, v24, ft0
 	vmv1r.v	v0, v16
 	vfcvt.rtz.x.f.v	v24, v8, v0.t
-	vfcvt.f.x.v	v24, v24, v0.t
 	lui	a0, %hi(.LCPI0_1)
 	fld	ft0, %lo(.LCPI0_1)(a0)
-	vsetvli	zero, zero, e64, m8, ta, ma
+	vfcvt.f.x.v	v24, v24, v0.t
+	vmv1r.v	v17, v16
 	vmflt.vv	v17, v24, v8, v0.t
-	vsetvli	zero, zero, e64, m8, ta, mu
 	vmv1r.v	v0, v17
 	vfadd.vf	v24, v24, ft0, v0.t
 	vmv1r.v	v0, v16

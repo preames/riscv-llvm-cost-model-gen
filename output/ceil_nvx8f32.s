@@ -22,12 +22,11 @@ ceil_nvx8f32:                           # @ceil_nvx8f32
 	vmflt.vf	v12, v16, ft0
 	vmv1r.v	v0, v12
 	vfcvt.rtz.x.f.v	v16, v8, v0.t
-	vfcvt.f.x.v	v16, v16, v0.t
 	lui	a0, %hi(.LCPI0_1)
 	flw	ft0, %lo(.LCPI0_1)(a0)
-	vsetvli	zero, zero, e32, m4, ta, ma
+	vfcvt.f.x.v	v16, v16, v0.t
+	vmv1r.v	v13, v12
 	vmflt.vv	v13, v16, v8, v0.t
-	vsetvli	zero, zero, e32, m4, ta, mu
 	vmv1r.v	v0, v13
 	vfadd.vf	v16, v16, ft0, v0.t
 	vmv1r.v	v0, v12

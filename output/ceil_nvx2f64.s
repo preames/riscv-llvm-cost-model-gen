@@ -22,12 +22,11 @@ ceil_nvx2f64:                           # @ceil_nvx2f64
 	vmflt.vf	v10, v12, ft0
 	vmv1r.v	v0, v10
 	vfcvt.rtz.x.f.v	v12, v8, v0.t
-	vfcvt.f.x.v	v12, v12, v0.t
 	lui	a0, %hi(.LCPI0_1)
 	fld	ft0, %lo(.LCPI0_1)(a0)
-	vsetvli	zero, zero, e64, m2, ta, ma
+	vfcvt.f.x.v	v12, v12, v0.t
+	vmv1r.v	v11, v10
 	vmflt.vv	v11, v12, v8, v0.t
-	vsetvli	zero, zero, e64, m2, ta, mu
 	vmv1r.v	v0, v11
 	vfadd.vf	v12, v12, ft0, v0.t
 	vmv1r.v	v0, v10

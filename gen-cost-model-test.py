@@ -1,6 +1,8 @@
 
-unary_intrinsics = ["floor", "ceil", "trunc",  "rint", "nearbyint",
-                    "round", "roundeven"]
+unary_intrinsics = [
+    "sqrt"
+]
+
 
 types = ["float", "<2 x float>", "<4 x float>", "<8 x float>", "<16 x float>",
          "<vscale x 2 x float>", "<vscale x 4 x float>",
