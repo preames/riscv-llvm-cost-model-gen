@@ -49,7 +49,26 @@ for intrinsic in unary_float:
         mangled = intrinsic_type_mapping[irtype]
         mvt = "MVT::" + mangled.replace("vx", "xv")
         asmname = "output/%s_%s.s" % (intrinsic, mangled)
-        if not os.path.exists(asmname):
+        if not os.path.exists(asmname) or os. stat(asmname).st_size == 0:
+            #print("   // %s_%s = CRASH" % (intrinsic, mvt))
+            continue
+
+        with open(asmname, "r") as f:
+            cost = cost_one(f)
+            if cost:
+                print("   {Intrinsic::%s, %s, %d}," % (intrinsic, mvt, cost))
+            else:
+                #print("   // %s_%s = None" % (intrinsic, mvt))
+                pass
+            pass
+        pass
+    pass
+for intrinsic in unary_integer:
+    for irtype in integer_types:
+        mangled = intrinsic_type_mapping[irtype]
+        mvt = "MVT::" + mangled.replace("vx", "xv")
+        asmname = "output/%s_%s.s" % (intrinsic, mangled)
+        if not os.path.exists(asmname) or os. stat(asmname).st_size == 0:
             #print("   // %s_%s = CRASH" % (intrinsic, mvt))
             continue
 
