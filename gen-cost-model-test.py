@@ -18,10 +18,11 @@ def get_signature(intrinsic, irtype, isdecl):
         pass
     pass
 
-for intrinsic in unary_float:
-    print("define void @%s() {" % (intrinsic))
 
-    for irtype in float_types:
+for record in intrinsic_mapping:
+    intrinsic = record[0]
+    print("define void @%s() {" % (intrinsic))
+    for irtype in record[1]:
         print(" " + get_signature(intrinsic, irtype, False))
         pass
     print("  ret void")
@@ -29,64 +30,9 @@ for intrinsic in unary_float:
     print("")
     pass
 
-for intrinsic in unary_integer:
-    print("define void @%s() {" % (intrinsic))
-    for irtype in integer_types:
-        if intrinsic == "bswap" and "i8" in irtype:
-            continue
-        print(" " + get_signature(intrinsic, irtype, False))
-        pass
-    print("  ret void")
-    print("}")
-    print("")
-    pass
-
-for intrinsic in binary_float:
-    print("define void @%s() {" % (intrinsic))
-    for irtype in float_types:
-        mangled = intrinsic_type_mapping[irtype]
-        s = "  call %s @llvm.%s.%s(%s undef, %s undef)" % (irtype, intrinsic, mangled, irtype, irtype)
-        print(s)
-        pass
-    print("  ret void")
-    print("}")
-    print("")
-    pass
-
-for intrinsic in binary_integer:
-    print("define void @%s() {" % (intrinsic))
-    for irtype in integer_types:
-        print(" " + get_signature(intrinsic, irtype, False))
-        pass
-    print("  ret void")
-    print("}")
-    print("")
-    pass
-
-
-for intrinsic in unary_float:
-    for irtype in float_types:
-        print(get_signature(intrinsic, irtype, True))
-        pass
-    print("")
-    pass
-
-for intrinsic in unary_integer:
-    for irtype in integer_types:
-        print(get_signature(intrinsic, irtype, True))
-        pass
-    print("")
-    pass
-
-for intrinsic in binary_float:
-    for irtype in float_types:
-        print(get_signature(intrinsic, irtype, True))
-        pass
-    print("")
-    pass
-
-for intrinsic in binary_integer:
-    for irtype in integer_types:
+for record in intrinsic_mapping:
+    intrinsic = record[0]
+    for irtype in record[1]:
         print(get_signature(intrinsic, irtype, True))
         pass
     print("")

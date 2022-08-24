@@ -154,3 +154,30 @@ intrinsic_type_mapping = {
     "<vscale x 8 x i64>":"nvx8i64",
     "<vscale x 16 x i64>":"nvx16i64",
     }
+
+def build_records():
+    result = []
+    for intrinsic in unary_float:
+        result.append([intrinsic, float_types])
+        pass
+    for intrinsic in unary_integer:
+        if intrinsic == "bswap":
+            filtered = []
+            for irtype in integer_types:
+                if "i8" in irtype:
+                    continue
+                filtered.append(irtype)
+                pass
+            result.append([intrinsic, filtered])
+            continue
+        result.append([intrinsic, integer_types])
+        pass
+    for intrinsic in binary_float:
+        result.append([intrinsic, float_types])
+        pass
+    for intrinsic in binary_integer:
+        result.append([intrinsic, integer_types])
+        pass
+    return result
+
+intrinsic_mapping = build_records()

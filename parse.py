@@ -44,27 +44,9 @@ if len(sys.argv) > 1:
     sys.exit(0)
 
 print ("static const CostTblEntry VectorIntrinsicCostTable[]{")
-for intrinsic in unary_float:
-    for irtype in float_types:
-        mangled = intrinsic_type_mapping[irtype]
-        mvt = "MVT::" + mangled.replace("vx", "xv")
-        asmname = "output/%s_%s.s" % (intrinsic, mangled)
-        if not os.path.exists(asmname) or os. stat(asmname).st_size == 0:
-            #print("   // %s_%s = CRASH" % (intrinsic, mvt))
-            continue
-
-        with open(asmname, "r") as f:
-            cost = cost_one(f)
-            if cost:
-                print("   {Intrinsic::%s, %s, %d}," % (intrinsic, mvt, cost))
-            else:
-                #print("   // %s_%s = None" % (intrinsic, mvt))
-                pass
-            pass
-        pass
-    pass
-for intrinsic in unary_integer:
-    for irtype in integer_types:
+for record in intrinsic_mapping:
+    intrinsic = record[0]
+    for irtype in record[1]:
         mangled = intrinsic_type_mapping[irtype]
         mvt = "MVT::" + mangled.replace("vx", "xv")
         asmname = "output/%s_%s.s" % (intrinsic, mangled)
