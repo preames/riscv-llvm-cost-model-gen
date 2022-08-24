@@ -12,8 +12,6 @@ unary_integer = [
   "bswap",
   "bitreverse",
   "ctpop",
-  "ctlz",
-  "cttz",
 ]
 
 binary_integer = [
@@ -47,6 +45,8 @@ oddball = [
   "fma",
   "fmuladd",
   "powi",
+  "ctlz",
+  "cttz",
 ]
 
 
