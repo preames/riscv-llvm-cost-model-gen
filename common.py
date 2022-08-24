@@ -3,15 +3,14 @@ unary_float = [
     "floor", "ceil", "trunc",
     "rint", "nearbyint",
     "round", "roundeven",
-    "sin", "cos", "exp", "exp2", "log", "log10", "log2", "fabs",
     "canonicalize",   "fptosi_sat",
     "fptoui_sat",
 ]
 
 unary_integer = [
-  "bswap",
-  "bitreverse",
-  "ctpop",
+    "bswap",
+    "bitreverse",
+    "ctpop",
 ]
 
 binary_integer = [
